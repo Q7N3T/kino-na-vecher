@@ -230,13 +230,14 @@ function renderFilm(id){
       <div class="tags">${f.m.map(m=>`<span class="tag">${MOODS.find(x=>x.v===m).tag}</span>`).join("")}${f.genres.map(g=>`<span class="tag">${esc(cap(g))}</span>`).join("")}</div>
       <div class="actions">
         <button class="btn" id="choose" aria-pressed="${chosen}">${chosen?"Выбрано на сегодня":"Смотрю сегодня"}</button>
+        <a class="btn ghost" href="https://www.kinopoisk.ru/film/${f.id}/video/" target="_blank" rel="noopener">Трейлер на Кинопоиске</a>
         <a class="btn ghost" href="#">Выбрать другой</a>
       </div>
       ${(f.kp||f.imdb)?`<div class="block"><h2>Рейтинги</h2><div class="scores">${f.kp?`<div><b>${f.kp.toFixed(1)}</b><span>Кинопоиск</span></div>`:""}${f.imdb?`<div><b>${f.imdb.toFixed(1)}</b><span>IMDb</span></div>`:""}</div></div>`:""}
       ${f.cast.length?`<div class="block"><h2>В ролях</h2><ul class="cast">${f.cast.map(p=>`<li>${esc(p.n)}${p.r?`<span>${esc(p.r)}</span>`:""}</li>`).join("")}</ul></div>`:""}
       ${aw.length?`<div class="block"><h2>Награды</h2><ul class="awards">${aw.map(a=>`<li><div>${esc(a.e)}, ${a.y}<br><span style="white-space:normal">${esc(a.c)}</span></div><span>${a.w==="win"?"Победа":"Номинация"}</span></li>`).join("")}</ul></div>`:""}
       ${f.themes.length?`<div class="block"><h2>О чём ещё</h2><div class="tags" style="margin:0">${f.themes.map(t=>`<span class="tag">${esc(cap(t))}</span>`).join("")}</div></div>`:""}
-      <div class="block links">${f.trailer?`<a href="${esc(f.trailer)}" target="_blank" rel="noopener">Трейлер</a>`:""}${f.kpurl?`<a href="${esc(f.kpurl)}" target="_blank" rel="noopener">Страница на Кинопоиске</a>`:""}</div>
+      <div class="block links">${f.kpurl?`<a href="${esc(f.kpurl)}" target="_blank" rel="noopener">Страница на Кинопоиске</a>`:""}</div>
     </div>
   </article>
   ${similar.length?`<section class="more"><h2>С похожим настроением</h2><div class="grid">${similar.map(card).join("")}</div></section>`:""}`;
